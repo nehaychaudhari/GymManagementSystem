@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body style="background-image: url(assets/types-of-soil.jpg);">
+  <header class="header">
+    <div class="content">
+      <h1>Admin Dashboard</h1>
+      <nav>
+        <a href="index.html">Logout</a>
+      </nav>
+    </div>
+  </header>
+  <main class="containers">
+    <section class="content">
+      <h1>Add Details</h1>
+      <form>
+        <div class="row">
+          <div class="soilDetails">
+            <h2>Add Soil Details</h2>
+            <select name="soil" id="soil">
+              <option value="Sandy">Sandy</option>
+              <option value="Clay">Clay</option>
+              <option value="Silty">Silty</option>
+              <option value="Loamy">Loamy</option>
+              <option value="Peaty">Peaty</option>
+              <option value="Chalky">Chalky</option>
+              <option value="Black">Black</option>
+              <option value="Alluvial">Alluvial</option>
+            </select>
+            <textarea id="characteristics" autocomplete="on" rows="5" placeholder="Characteristics"></textarea>
+            <textarea id="crops" rows="5" autocomplete="on" placeholder="Suitable Crops"></textarea>
+          </div>
+
+          <div class="destributor">
+            <h2>Add Distributor Details</h2>
+            <input type="number" id="DistId" autocomplete="on" placeholder="Distributor Id Number">
+            <input type="text" id="DistName" autocomplete="on" placeholder="Distributor Name">
+            <input type="text" id="location" autocomplete="on" placeholder="Location">
+            <input type="email" id="email" autocomplete="on" placeholder="Email Id">
+          </div>
+        </div>
+
+        <button type="button" id="add" class="add">Add</button>
+        <button type="button" id="retrieve" class="retrieve">Retrieve</button>
+        <button type="button" id="update" class="update">Update</button>
+        <button type="button" id="delete" class="delete">Delete</button>
+      </form>
+
+    </section>
+  </main>
+  <footer>
+    <div class="content">
+      <p>&copy; 2025 Soil Farming Agent | Admin Panel | All rights reserved</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDkvdeFRM2B097ovGxsoQIRkZf2fBkwNv8",
+      authDomain: "soilfarmingagent-7feb25.firebaseapp.com",
+      databaseURL: "https://soilfarmingagent-7feb25-default-rtdb.firebaseio.com",
+      projectId: "soilfarmingagent-7feb25",
+      storageBucket: "soilfarmingagent-7feb25.firebasestorage.app",
+      messagingSenderId: "249491755364",
+      appId: "1:249491755364:web:10cec17841a2220bd76a71"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    import { getDatabase, ref, get, child, set, update, remove } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-database.js";
+
+    const db = getDatabase();
+
+    // Inputs
+    let soil = document.getElementById('soil');
+    let characteristics = document.getElementById('characteristics');
+    let crops = document.getElementById('crops');
+    let DistId = document.getElementById('DistId');
+    let DistName = document.getElementById('DistName');
+    let location = document.getElementById('location');
+    let email = document.getElementById('email');
+
+    // Buttons
+    let addbtn = document.getElementById('add');
+    let retbtn = document.getElementById('retrieve');
+    let updatebtn = document.getElementById('update');
+    let deletebtn = document.getElementById('delete');
+
+    // Add Data in Database
+    function AddData() {
+      set(ref(db, 'DataSet/' + DistId.value), {
+        SoilType: soil.value,
+        CharacteristicsOfSoil: characteristics.value,
+        CropsOfSoil: crops.value,
+        IdNumberOfDistributor: Number(DistId.value),
+        NameOfDistributor: DistName.value,
+        Location: location.value,
+        Contact: email.value
+      }).then(() => {
+        alert("Data Added Successfully!!!");
+      }).catch((error) => {
+        alert("Unsuccessful!!!");
+        console.log(error);
+      })
+    }
+
+    // Retrieve Data
+    function RetData() {
+      const dbRef = ref(db);
+
+      get(child(dbRef, 'DataSet/' + DistId.value)).then((snapshot) => {
+        if (snapshot.exists()) {
+          soil.value = snapshot.val().SoilType;
+          characteristics.value = snapshot.val().CharacteristicsOfSoil;
+          crops.value = snapshot.val().CropsOfSoil;
+          DistName.value = snapshot.val().NameOfDistributor;
+          location.value = snapshot.val().Location;
+          email.value = snapshot.val().Contact;
+        }
+        else {
+          alert("Distributor does not exist!");
+        }
+      }).catch((error) => {
+        alert("Unsuccessful!!!");
+        console.log(error);
+      })
+    }
+
+    // Update Data in Database
+    function UpdateData() {
+      update(ref(db, 'DataSet/' + DistId.value), {
+        SoilType: soil.value,
+        CropsOfSoil: crops.value,
+        CharacteristicsOfSoil: characteristics.value,
+        NameOfDistributor: DistName.value,
+        Location: location.value,
+        Contact: email.value
+      }).then(() => {
+        alert("Data Updated Successfully!!!");
+      }).catch((error) => {
+        alert("Unsuccessful!!!");
+        console.log(error);
+      })
+    }
+
+    // Delete Data 
+    function DeleteData() {
+      remove(ref(db, 'DataSet/' + DistId.value))
+        .then(() => {
+          alert("Data Deleted Successfully!!!");
+        }).catch((error) => {
+          alert("Unsuccessful!!!");
+          console.log(error);
+        })
+    }
+
+    addbtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      AddData();
+    });
+
+    retbtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      RetData();
+    });
+
+    updatebtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      UpdateData();
+    });
+
+    deletebtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      DeleteData();
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,488 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #000000;
+    color: #000000;
+    min-width: 95vh;
+    overflow-x: hidden;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.space {
+    margin-bottom: 50px;
+}
+
+.containers {
+    min-height: 100vh;
+}
+
+.containers h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 5rem;
+    font-weight: 900;
+    text-align: center;
+}
+
+.containers h1:hover {
+    font-size: 6rem;
+    transition: 1s;
+}
+
+/* Header Section Start */
+.navbar {
+    font-size: 1.2rem;
+    font-weight: 900;
+    background: linear-gradient(to bottom right, #FBFBFBe0, #E8F9FFe0 30%, #C4D9FFe0, #C5BAFFe0, #a999fbe0);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 3;
+    box-shadow: 0 10px 30px 5px #00000090;
+}
+
+nav ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+nav li {
+    height: 50px;
+}
+
+nav a {
+    height: 100%;
+    padding: 0 30px;
+    display: flex;
+    color: #000000;
+    align-items: center;
+}
+
+nav .hideOnMobile:hover{
+    background: linear-gradient(to top left, #33ccff 0%, #ff99cc 100%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+nav li:first-child {
+    margin-right: auto;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    z-index: 999;
+    background-color: #ffffff33;
+    backdrop-filter: blur(10px);
+    box-shadow: -10 0 10px #00000033;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.sidebar li,
+.sidebar a {
+    width: 100%;
+}
+
+.nav-logo {
+    font-family: Verdana, Geneva, Tahoma, sans-serif, Algarian;
+}
+
+.menuButton {
+    display: none;
+    margin: 20px 20px 0px 0px;
+}
+
+@media(max-width: 1027px) {
+    .hideOnMobile {
+        display: none;
+    }
+
+    .menuButton {
+        display: block;
+        margin-right: 100px;
+    }
+}
+
+@media(max-width: 400px) {
+    .sidebar {
+        width: 100%;
+    }
+}
+
+@media(max-width: 338px) {
+    .nav-logo {
+        font-size: 12px;
+    }
+}
+
+/* Header Section End */
+
+/* Hero Section Start */
+.hero video {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0000007f;
+    z-index: 1;
+    color: #ffffff;
+}
+
+.hero .containers {
+    position: relative;
+    z-index: 2;
+    padding: 1rem 10rem 1rem 10rem;
+}
+
+.hero .fadeUp {
+    font-size: 7rem;
+    color: #ffffff;
+    letter-spacing: 0;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeUp 2s ease-out forwards;
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero .typewriter {
+    font-size: 3rem;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: fadeDown 2s ease-out forwards;
+}
+
+@keyframes fadeDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 700px) {
+    .hero .containers {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .hero .containers {
+        padding: 5rem 5rem 1rem 1rem;
+    }
+
+    .hero .fadeUp {
+        font-size: 3rem;
+    }
+
+    .hero .typewriter {
+        font-size: 1.5rem;
+    }
+}
+
+/* Hero Section End */
+
+.main-content {
+    background: linear-gradient(to bottom right, #FBFBFBe0, #E8F9FFe0 30%, #C4D9FFe0, #C5BAFFe0, #a999fbe0);
+    border-bottom-right-radius: 125px;
+}
+
+/* About Section Start */
+.about {
+    padding: 0 5rem 0 5rem;
+    text-align: justify;
+    line-height: 2;
+    font-size: 1.5rem;
+}
+
+.our-story {
+    margin-right: 2rem;
+    width: 30rem;
+    float: left;
+    box-shadow: 0px 0px 20px 10px #000000;
+    border-radius: 20px;
+}
+
+@media (max-width: 560px) {
+    .about {
+        margin: 0;
+        width: 100%;
+        max-width: 1200px;
+        padding: 10px;
+    }
+
+    .our-story {
+        width: 21.5rem;
+    }
+}
+
+/* About Section End */
+
+/* Plan Section Start */
+.pricing {
+    padding: 0 5rem 0 5rem;
+    line-height: 1.5;
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: justify;
+}
+
+.pricing h2,
+.card h3 {
+    text-align: center;
+}
+
+.detail {
+    text-align: center;
+}
+
+.row-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card {
+    border: 1px solid #ffffff;
+    margin: 1rem;
+    padding: 1rem;
+    transition: 1s;
+    width: 30%;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px 5px #ffffff;
+}
+
+@media (max-width: 800px) {
+    .pricing {
+        padding: 10px;
+    }
+
+    .row-card {
+        flex-direction: column !important;
+    }
+
+    .card {
+        width: 90%;
+    }
+}
+
+/* Plan Section End */
+
+/* Contact Section Start */
+.contact #contactForm {
+    margin: 5px 200px 10px 200px;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 800px) {
+    .contact #contactForm {
+        padding: 1rem;
+        margin: 1rem;
+    }
+}
+
+.contact #contactForm input,
+.contact #contactForm textarea,
+.contact #contactForm select {
+    background: transparent;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    margin: 10px 0 10px 0;
+    color: #000000;
+    border: none;
+    outline: none;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
+.contact #contactForm select {
+    color: #000000;
+    font-weight: 600;
+}
+
+.contact #contactForm .btn {
+    border: 5px solid #008000;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #008000;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-top: 10px;
+    padding: 5px;
+    transition: 1s;
+}
+
+.contact #contactForm .btn:hover {
+    background-color: #008000;
+    color: #ffffff;
+    box-shadow: 0px 0px 10px 5px #ffffff;
+}
+
+/* Contact Section End */
+
+/* LogIn, SignUp Pages - Admin, Member, User Start */
+.login-form {
+    padding: 3rem 0 0 0;
+    text-align: center;
+    font-size: 3rem;
+    color: #000000;
+}
+
+@media (max-width: 800px) {
+    .contact #btn,
+    .contact #ubtn,
+    .contact #ubtns {
+        margin-bottom: 5rem;
+    }
+}
+
+/* LogIn, SignUp Pages - Admin, Member, User End */
+
+/* Footer Section Start */
+footer {
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(to bottom right, #FBFBFBe0, #E8F9FFe0 30%, #C4D9FFe0, #C5BAFFe0, #a999fbe0);
+    color: #000000;
+    padding: 30px 30px 0 30px;
+    border-top-left-radius: 125px;
+    box-shadow: 0 20px 20px 30px #00000090;
+}
+
+footer a {
+    color: #000000;
+}
+
+footer .row {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 800px) {
+    footer .row {
+        flex-direction: column !important;
+    }
+}
+
+footer .row,
+footer .row .col {
+    width: 100%;
+}
+
+footer p {
+    padding: 5px;
+}
+
+footer h3 {
+    margin: 1rem auto 1rem auto;
+    text-decoration: #17a2b8 double underline;
+    color: #17a2b8;
+}
+
+footer h1 {
+    text-align: center;
+    margin: 1rem;
+}
+
+.copyright {
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Footer Section End */
+
+/* Terms, Privacy, Refund Start */
+.content {
+    padding: 5rem;
+    text-align: justify;
+    line-height: 2;
+    background: linear-gradient(to bottom right, #FBFBFBe0, #E8F9FFe0 30%, #C4D9FFe0, #C5BAFFe0, #a999fbe0);
+    border-bottom-right-radius: 125px;
+}
+
+.content h1 {
+    font-size: 5rem;
+}
+
+@media (max-width: 700px) {
+    .content h1 {
+        font-size: 2rem;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+.content h1:hover {
+    text-decoration: underline;
+}
+
+.content h3 {
+    font-size: 2rem;
+}
+
+.content h3:hover {
+    font-size: 2.5rem;
+}
+
+.content hr {
+    margin: 1rem auto 1rem auto;
+}
+
+.content p {
+    font-size: 1.5rem;
+}
+
+/* Terms, Privacy, Refund End */

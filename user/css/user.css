@@ -1,0 +1,333 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    transition: background 0.5s ease;
+    background-size: fill;
+    /* Ensure the background image covers the entire page */
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #33333378;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
+    text-align: center;
+    align-items: center;
+    transition: 1s;
+}
+
+/* Navbar links */
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 1rem;
+    text-decoration: none;
+}
+
+/* Dropdown container */
+.dropdown {
+    float: left;
+    overflow: hidden;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn,
+.dropdown .logout {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    padding: 1rem 1rem;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #00000077;
+    margin-top: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1;
+    height: 30rem;
+    overflow: scroll;
+    right: 10px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.dropdown-content::-webkit-scrollbar,
+.main-content .showcontent::-webkit-scrollbar {
+    display: none;
+}
+
+/* Theme options in dropdown */
+.dropdown-content div {
+    color: rgb(255, 255, 255);
+    padding: 0.8rem 1rem;
+    margin: 10px 1.5rem;
+    text-decoration: none;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    height: 3rem;
+    width: 15rem;
+    border-radius: 10px;
+}
+
+/* Change color on hover */
+.dropdown-content div:hover {
+    font-weight: 900;
+}
+
+/* Show dropdown on click */
+.dropdown-content.show {
+    display: block;
+}
+
+/* Theme option styling */
+.theme-option {
+    display: flex;
+    align-items: right;
+    justify-content: space-between;
+}
+
+/* Margin for the theme name */
+.theme-option span {
+    margin-left: 10px;
+}
+
+/* Style for selected theme */
+.theme-option.selected::before {
+    content: '✔ ';
+    color: #008000;
+}
+
+.search {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+#search-btn {
+    background-color: transparent;
+    font-size: 1.1rem;
+    border-radius: 20px;
+    border: none;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+    color: #ffffff;
+    transition: 1s;
+    padding: 5px;
+}
+
+#search-btn:hover {
+    background-color: #00000044;
+    color: #ffffff;
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    background: #ffffff1a;
+    border: 1px solid #ffffff33;
+    border-radius: 25px;
+    padding: 8px 16px;
+    width: 400px;
+    max-width: 100%;
+    box-shadow: 0 2px 5px #0000001a;
+}
+
+/* Search Icon */
+.search-icon {
+    color: #ffffff;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.search::placeholder {
+    color: #ffffff;
+}
+
+.gym-logo {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: x-large;
+}
+
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+mark {
+    background-color: #ffff00;
+    color: #000000;
+}
+
+.main-content .showcontent {
+    margin: 16px 10px;
+    width: 90%;
+    height: 75vh;
+    max-height: 90vh;
+    overflow: scroll;
+    padding: 1rem;
+    background-color: #33333378;
+    border-radius: 20px;
+    color: #ffffff;
+    transition: 1s;
+}
+
+/* Main Content----------------------------------------------------------------------- */
+/* About Section Start */
+.about {
+    padding: 0 1rem;
+    text-align: justify;
+    line-height: 2;
+    font-size: 1.5rem;
+}
+
+/* About Section End */
+
+/* Plan Section Start */
+.pricing {
+    padding: 0 1rem;
+    line-height: 1.5;
+    font-size: 1.5rem;
+    width: 90%;
+    text-align: justify;
+}
+
+.pricing h2,
+.card h3 {
+    text-align: center;
+}
+
+.detail {
+    text-align: center;
+}
+
+.row-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card {
+    border: 1px solid #ffffff;
+    margin: 1rem;
+    padding: 1rem;
+    transition: 1s;
+    width: 27%;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px 5px #ffffff;
+}
+
+/* Plan Section End */
+
+/* Contact Section Start */
+.contact #contactForm {
+    margin: 5px 100px 10px 200px;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    font-size: 1.5rem;
+}
+
+.contact #contactForm input,
+.contact #contactForm textarea,
+.contact #contactForm select {
+    background: transparent;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    margin: 10px 0 10px 0;
+    color: #ffffff;
+    box-shadow: 0px 0px 10px 5px #ffffff;
+}
+
+.contact #contactForm select {
+    color: #000000;
+    font-weight: 600;
+}
+
+.contact #contactForm .btn {
+    border: 5px solid #008000;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #008000;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.contact #contactForm .btn:hover {
+    background-color: #008000;
+    color: #ffffff;
+    box-shadow: 0px 0px 10px 5px #ffffff;
+}
+
+/* Contact Section End */
+
+/* Responsive Style */
+@media (max-width: 800px) {
+    .search {
+        width: 50%;
+    }
+
+    .searchbar {
+        width: 90%;
+        margin: 5px;
+    }
+
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        height: 15rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .contact #contactForm {
+        padding: 1rem;
+        margin: 1rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .pricing {
+        padding: 10px;
+    }
+
+    .row-card {
+        flex-direction: column !important;
+    }
+
+    .card {
+        width: 90%;
+    }
+}

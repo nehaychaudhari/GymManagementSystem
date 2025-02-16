@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Management System | User Dashboard</title>
+    <!-- AOS Link -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../content/logo.ico" type="image/x-icon">
+
+    <!-- Font Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- External CSS File -->
+    <link rel="stylesheet" href="css/user.css">
+</head>
+
+<body>
+    <!-- Header Section Start -->
+    <nav class="navbar">
+        <div class="gymname"><a href="#" class="gym-logo">Gym Management System</a></div>
+        <div style="color: #ffffff; font-size: 1.5rem;">User Dashboard</div>
+        
+        <div class="searchbar">
+            <i class="fa-solid fa-magnifying-glass search-icon" style="color: #ffffff;"></i>
+            <input type="text" name="search" id="search" class="search" placeholder="Search..." />
+        </div>
+        <!-- Dropdown button for theme picker -->
+        <div class="dropdown">
+
+            <!-- <button class="drop"><i class="fa-solid fa-bell fa-shake" style="color: #ffffff;"></i></button> -->
+            <button class="dropbtn" id="dropbtn" onclick="toggleDropdown()">
+                <i class="fa-solid fa-palette fa-2xl" style="color: #ffffff;"></i>
+            </button>
+            <div id="myDropdown" class="dropdown-content">
+                <!-- Theme options -->
+                <div class="theme-option desert"
+                    style="background-image: url('../content/Desert.jpg'); background-size: cover;"
+                    onclick="selectTheme('desert')">Desert</div>
+                <div class="theme-option galaxy"
+                    style="background-image: url('../content/Galaxy.jpg'); background-size: cover;"
+                    onclick="selectTheme('galaxy')">Galaxy</div>
+                <div class="theme-option kinetic"
+                    style="background-image: url('../content/Kinetic.jpg'); background-size: cover;"
+                    onclick="selectTheme('kinetic')">Kinetic</div>
+                <div class="theme-option northern-light selected"
+                    style="background-image: url('../content/NorthernLight.jpg'); background-size: cover;"
+                    onclick="selectTheme('northern-light')">Northern Light</div>
+                <div class="theme-option red-velvet"
+                    style="background-image: url('../content/RedVelvet.jpg'); background-size: cover;"
+                    onclick="selectTheme('red-velvet')">Red Velvet</div>
+                <div class="theme-option solaris"
+                    style="background-image: url('../content/Solaris.jpg'); background-size: cover;"
+                    onclick="selectTheme('solaris')">Solaris</div>
+                <div class="theme-option sunset"
+                    style="background-image: url('../content/Sunset.jpg'); background-size: cover;"
+                    onclick="selectTheme('sunset')">Sunset</div>
+            </div>
+            <!-- <span id="user-name" style="color: #ffffff; font-weight: 900;">Neha</span> -->
+            <button class="logout" id="logoutBtn"><i class="fa-solid fa-right-from-bracket fa-2xl"
+                    style="color: #ffffff;"></i></button>
+
+        </div>
+    </nav>
+    <!-- Header Section End -->
+
+    <!-- Main Content Start -->
+    <div class="main-content">
+        <div class="showcontent">
+            <!-- About Section Start -->
+            <section id="about" class="about">
+                <div class="containers">
+                    <h1>About Us</h1>
+                    <p>
+                        &emsp;&emsp;&emsp;Welcome to Gym Management System, where fitness meets innovation. Our
+                        mission is to empower gyms and fitness centers with cutting-edge management solutions that
+                        streamline
+                        operations, enhance member experiences, and drive growth.
+                    </p>
+                    <h3>Our Story</h3>
+                    <p>
+                        &emsp;&emsp;&emsp;Founded in 2025, Gym Management System emerged from a passion for fitness and
+                        technology. Recognizing the challenges gym owners face in managing daily operations, we set out
+                        to
+                        create a comprehensive platform that simplifies tasks such as membership management, class
+                        scheduling, and billing.
+                    </p>
+
+                    <h3>What We Offer</h3>
+                    <p>
+                        <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                        <b>Comprehensive Management Tools: </b>
+                        From tracking memberships to scheduling classes, our system offers a suite of features designed
+                        to
+                        simplify your operations.
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                        <b>User-Friendly Interface: </b>
+                        Our intuitive design ensures that both staff and members can navigate the system with ease.
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                        <b>Customizable Solutions: </b>
+                        We understand that every gym is unique. Our platform can be tailored to meet the specific needs
+                        of
+                        your
+                        facility.
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                        <b>Reliable Support: </b>
+                        Our dedicated support team is always ready to assist you, ensuring a seamless experience.
+                    </p>
+
+                    <h3>Our Commitment</h3>
+                    <p>
+                        &emsp;&emsp;&emsp;At Gym Management System, we are committed to continuous improvement. We
+                        regularly
+                        update our platform based on user feedback and the latest industry trends to ensure we provide
+                        the
+                        best
+                        possible service.
+                    </p>
+
+                    <h3>Join Us</h3>
+                    <p>
+                        &emsp;&emsp;&emsp;Whether you're a small boutique studio or a large fitness center, Gym
+                        Management
+                        System is here to
+                        support your journey. Partner with us to elevate your gym's operations and provide an
+                        exceptional
+                        experience for your members.
+                    </p>
+                    <p>
+                        For more information or to schedule a demo, please contact us at
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                        Gym Management System
+                    </p>
+                    <p>
+                        <i class="fas fa-home fa-2xs" style="color: #ffffff;"></i>&emsp;
+                        Pimpri-Chinchwad, Pune, Maharashtra, 123 456
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope fa-2xs" style="color: #ffffff;"></i>&emsp;
+                        contact@gymManagement.com
+                    </p>
+                    <p>
+                        <i class="fas fa-phone fa-2xs" style="color: #ffffff;"></i>&emsp;
+                        +91 9876543210
+                    </p>
+                </div>
+            </section>
+            <!-- About Section End -->
+
+            <!-- Pricing Section Start -->
+            <section class="pricing">
+                <div class="containers">
+                    <h1>Pricing Plans</h1>
+                    <p>
+                        &emsp;&emsp;&emsp;At Gym Management System, we offer flexible and comprehensive pricing
+                        plans designed to meet the diverse needs of fitness centers and their members. Our goal is to
+                        provide solutions that enhance your operations while delivering exceptional value.
+                    </p>
+                    <h2>Membership Plans</h2>
+                    <div class="row-card">
+                        <div class="card">
+                            <h3>Basic Plan</h3>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Access to core gym management functionalities.
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Member check-in and attendance tracking
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Standard reporting tools
+                            </p>
+                            <h4 class="detail">&#8377; 1000 Per Month</h4>
+                        </div>
+                        <div class="card">
+                            <h3>Standard Plan</h3>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                All features in the Basic Plan
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Class scheduling and management
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Automated billing and invoicing
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Email and SMS notifications
+                            </p>
+                            <h4 class="detail">&#8377; 2000 Per Month</h4>
+                        </div>
+                        <div class="card">
+                            <h3>Premium Plan</h3>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                All features in the Standard Plan
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Advanced analytics and reporting
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Customizable member app
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Priority customer support
+                            </p>
+                            <h4 class="detail">&#8377; 3000 Per Month</h4>
+                        </div>
+                    </div>
+
+                    <h2>Annual Plans</h2>
+                    <p class="detail">Opting for an annual plan provides additional savings and benefits:</p>
+                    <div class="row-card">
+                        <div class="card">
+                            <h3>Basic Annual Plan</h3>
+                            <h4 class="detail">&#8377; 10000 Per Year </h4>
+                            <p style="color: green;" class="detail">(Save &#8377; 2000/-)</p>
+                        </div>
+                        <div class="card">
+                            <h3>Standard Annual Plan</h3>
+                            <h4 class="detail">&#8377; 20000 Per Year </h4>
+                            <p style="color: green;" class="detail">(Save &#8377; 4000/-)</p>
+                        </div>
+                        <div class="card">
+                            <h3>Premium Annual Plan</h3>
+                            <h4 class="detail">&#8377; 30000 Per Year </h4>
+                            <p style="color: green;" class="detail">(Save &#8377; 6000/-)</p>
+                        </div>
+                    </div>
+
+                    <h2>Add-On Services</h2>
+                    <p class="detail">Enhance your membership with the following add-ons:</p>
+                    <div class="row-card">
+                        <div class="card">
+                            <h3>Personal Training Module</h3>
+                            <h4 class="detail">&#8377; 300 Per Month </h4>
+                        </div>
+                        <div class="card">
+                            <h3>Nutrition Tracking</h3>
+                            <h4 class="detail">&#8377; 200 Per Month </h4>
+                        </div>
+                        <div class="card">
+                            <h3>Online Class Integration</h3>
+                            <h4 class="detail">&#8377; 100 Per Month </h4>
+                        </div>
+                    </div>
+
+                    <div class="row-card">
+                        <div class="card">
+                            <h2>Free Trial</h2>
+                            <p>
+                                &emsp;&emsp;&emsp;We offer a 3 days free trial for new clients to experience our
+                                system's
+                                capabilities. No credit card is required to start the trial.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h2>Payment Methods</h2>
+                            <p>
+                                &emsp;&emsp;&emsp;We accept various payment methods, including credit/debit cards, bank
+                                transfers, and online payment gateways. All transactions are secured with
+                                industry-standard
+                                encryption.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h2>Refund Policy</h2>
+                            <p>
+                                &emsp;&emsp;&emsp;We stand by the quality of our services. If you're not satisfied
+                                within
+                                the
+                                first 10 days of your subscription, we offer a full refund. For more details, please
+                                refer
+                                to our
+                                <a href="../refund.html">Refund Policy</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Pricing Section End -->
+
+            <!-- Contact Section Start -->
+            <section class="contact">
+                <div class="containers">
+                    <h1>Contact</h1>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <label for="uname">Name</label>
+                            <input type="text" id="uname" name="username" autocomplete="on"
+                                placeholder="Enter your name" required>
+                            <label for="email">Email Id</label>
+                            <input type="email" id="email" name="uemail" autocomplete="on"
+                                placeholder="Enter your email" required>
+                            <label for="message">Message</label>
+                            <textarea id="message" name="msg" placeholder="Write your message" rows="5"
+                                required></textarea>
+                            <button type="button" class="btn" onclick="sendMail()">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <!-- Contact Section End -->
+        </div>
+    </div>
+    <!-- Main Content End -->
+
+    <!-- AOS Link -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <!-- External Javascript File -->
+    <script src="js/user.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body style="background-image: url(assets/types-of-soil.jpg);">
+  <header class="header">
+    <div class="content">
+      <h1>User Dashboard</h1>
+      <a href="index.html">Logout</a>
+    </div>
+  </header>
+  <main class="usermain">
+    <section class="content">
+      <table id="tableData">
+        <thead>
+          <tr>
+            <th colspan="4">
+              <h2>Soil Details</h2>
+            </th>
+            <th colspan="4">
+              <h2>Distributor Details</h2>
+            </th>
+          </tr>
+          <tr>
+            <th>Sr. No</th>
+            <th>Soil Type</th>
+            <th>Characteristics</th>
+            <th>Suitable Crops</th>
+            <th>Distributor Id</th>
+            <th>Distributor Name</th>
+            <th>Location</th>
+            <th>Email Id</th>
+          </tr>
+        </thead>
+        <tbody id="tbody1">
+          <!-- Dynamic content from Firebase -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+    <div class="content">
+      <p>&copy; 2025 Soil Farming Agent | User Panel | All rights reserved</p>
+    </div>
+  </footer>
+
+  <!-- Firebase Libraries -->
+
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+
+  <script id="MainScript">
+
+    // Firebase Web App Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDkvdeFRM2B097ovGxsoQIRkZf2fBkwNv8",
+      authDomain: "soilfarmingagent-7feb25.firebaseapp.com",
+      databaseURL: "https://soilfarmingagent-7feb25-default-rtdb.firebaseio.com",
+      projectId: "soilfarmingagent-7feb25",
+      storageBucket: "soilfarmingagent-7feb25.firebasestorage.app",
+      messagingSenderId: "249491755364",
+      appId: "1:249491755364:web:10cec17841a2220bd76a71"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Get Data From Firebase
+    function SelectAllData() {
+      firebase.database().ref('DataSet/').on('value',
+        function (AllRecords) {
+          AllRecords.forEach(
+            function (CurrentRecord) {
+              var soil = CurrentRecord.val().SoilType;
+              var characteristics = CurrentRecord.val().CharacteristicsOfSoil;
+              var crops = CurrentRecord.val().CropsOfSoil;
+              var DistId = CurrentRecord.val().IdNumberOfDistributor;
+              var DistName = CurrentRecord.val().NameOfDistributor;
+              var location = CurrentRecord.val().Location;
+              var email = CurrentRecord.val().Contact;
+              AddItemsToTable(soil, characteristics, crops, DistId, DistName, location, email);
+            }
+          );
+        });
+    }
+    window.onload = SelectAllData;
+
+    // Filling the table
+    var tblNo = 0;
+    function AddItemsToTable(soil, characteristics, crops, DistId, DistName, location, email) {
+      var tbody = document.getElementById('tbody1');
+      var trow = document.createElement('tr');
+      var td1 = document.createElement('th');
+      var td2 = document.createElement('td');
+      var td3 = document.createElement('td');
+      var td4 = document.createElement('td');
+      var td5 = document.createElement('th');
+      var td6 = document.createElement('td');
+      var td7 = document.createElement('td');
+      var td8 = document.createElement('td');
+
+      td1.innerHTML = ++tblNo;
+      td2.innerHTML = soil;
+      td3.innerHTML = characteristics;
+      td4.innerHTML = crops;
+      td5.innerHTML = DistId;
+      td6.innerHTML = DistName;
+      td7.innerHTML = location;
+      td8.innerHTML = email;
+
+      trow.appendChild(td1);
+      trow.appendChild(td2);
+      trow.appendChild(td3);
+      trow.appendChild(td4);
+      trow.appendChild(td5);
+      trow.appendChild(td6);
+      trow.appendChild(td7);
+      trow.appendChild(td8);
+
+      tbody.appendChild(trow);
+    }
+  </script>
+
+</body>
+
+</html>

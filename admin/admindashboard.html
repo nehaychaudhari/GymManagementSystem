@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Management System | Admin Dashboard</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../content/logo.ico" type="image/x-icon">
+
+    <!-- Font Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- External CSS File -->
+    <link rel="stylesheet" href="css/admin.css">
+
+    <!-- CryptoJS - Password Encryption -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <!-- Firebase Database -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+    <!-- Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Header Section Start -->
+    <nav class="navbar">
+        <div class="gymname"><a href="#" class="gym-logo">Gym Management System</a></div>
+
+        <!-- Dropdown button for theme picker -->
+        <div class="dropdown">
+            <button type="button" class="bar" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
+            </button>
+
+            <button class="dropbtn" id="dropbtn" onclick="toggleDropdown()">
+                <i class="fa-solid fa-palette fa-2xl" style="color: #ffffff;"></i>
+            </button>
+            <div id="myDropdown" class="dropdown-content">
+                <!-- Theme options -->
+                <div class="theme-option desert"
+                    style="background-image: url('../content/Desert.jpg'); background-size: cover;"
+                    onclick="selectTheme('desert')">Desert</div>
+                <div class="theme-option galaxy"
+                    style="background-image: url('../content/Galaxy.jpg'); background-size: cover;"
+                    onclick="selectTheme('galaxy')">Galaxy</div>
+                <div class="theme-option kinetic"
+                    style="background-image: url('../content/Kinetic.jpg'); background-size: cover;"
+                    onclick="selectTheme('kinetic')">Kinetic</div>
+                <div class="theme-option northern-light selected"
+                    style="background-image: url('../content/NorthernLight.jpg'); background-size: cover;"
+                    onclick="selectTheme('northern-light')">Northern Light</div>
+                <div class="theme-option red-velvet"
+                    style="background-image: url('../content/RedVelvet.jpg'); background-size: cover;"
+                    onclick="selectTheme('red-velvet')">Red Velvet</div>
+                <div class="theme-option solaris"
+                    style="background-image: url('../content/Solaris.jpg'); background-size: cover;"
+                    onclick="selectTheme('solaris')">Solaris</div>
+                <div class="theme-option sunset"
+                    style="background-image: url('../content/Sunset.jpg'); background-size: cover;"
+                    onclick="selectTheme('sunset')">Sunset</div>
+            </div>
+            <button class="logout" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket fa-2xl" style="color: #ffffff;"></i>
+            </button>
+
+        </div>
+    </nav>
+    <!-- Header Section End -->
+
+    <!-- Main Content Start -->
+    <main class="main-admin">
+        <div class="showcontent">
+            <div class="sidebar" id="sidebar">
+                <ul>
+                    <button type="button" class="xmark" onclick="toggleSidebar()">
+                        <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i>
+                    </button>
+                    <!-- Add New, Update, Delete Member, Send Notification, Fetch Member Details From Database -->
+                    <li><a href="#members">Manage Members</a></li>
+                    <hr>
+                    <!-- Plan name, bill number, member name, email id, plan duration, bill generate time -->
+                    <li><a href="#bills">Create Bills</a></li>
+                    <hr>
+                    <!-- Pricing plans price change -->
+                    <li><a href="#fee-packages">Assign Fee Packages</a></li>
+                    <hr>
+                    <!-- Gym Report -->
+                    <li><a href="#reports">View Reports</a></li>
+                    <hr>
+                    <!-- Add new supplement products for gym with price, product name, image, short description -->
+                    <li><a href="#store">Manage Supplement Store</a></li>
+                    <hr>
+                    <!-- Diet plan details, morning, afternoon, evening, night food  -->
+                    <li><a href="#diet-plans">Diet Details</a></li>
+                </ul>
+            </div>
+            <div class="main-panel">
+                <h1>WELCOME TO ADMIN DASHBOARD</h1>
+                <div id="members" class="section members">
+                    <div class="memberNav" id="memberNav">
+                        <h2>Manage Members</h2>
+                        <button type="button" id="addmemberbtn">Add Member</button>
+                    </div>
+                    <!-- Member Table -->
+                    <div class="manageMembers" id="manageMembers">
+                        <table id="MemberTable" class="MemberTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email Id</th>
+                                    <th colspan="3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="memberList"></tbody>
+                        </table>
+
+                        <!-- Add Member Form -->
+                        <div class="modal" id="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <form id="AddMember" class="AddMember">
+                                    <h2>Add New Member</h2>
+                                    <label for="name">Name:</label>
+                                    <input type="text" id="name" autocomplete="on" placeholder="Enter Your Full Name"
+                                        required>
+
+                                    <label for="email">Email Id</label>
+                                    <input type="email" id="email" autocomplete="on" placeholder="example@example.com"
+                                        required />
+
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" placeholder="Enter Your Password" required />
+                                    <div class="showpass">
+                                        <input type="checkbox" id="showP" onclick="showPass()"> Show Password
+                                    </div>
+
+                                    <label for="confirm-password">Confirm Password</label>
+                                    <input type="password" id="confirm-password" placeholder="Confirm Your Password"
+                                        required />
+
+                                    <div class="showpass">
+                                        <input type="checkbox" id="confirmP" onclick="confirmPass()"> Show Password
+                                    </div>
+
+                                    <select id="role">
+                                        <option value="Member">Role: Member</option>
+                                    </select>
+
+                                    <button type="button" class="btn" id="addbtn">Add</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Edit Modal -->
+                        <!-- <div id="editModal" class="modal">
+                            <div class="modal-content">
+                                <h3>Edit Member</h3>
+                                <input type="text" id="editName" placeholder="Enter Name">
+                                <input type="email" id="editEmail" placeholder="Enter Email">
+                                <button onclick="updateMember()">Update</button>
+                                <button onclick="closeModal()">Close</button>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div id="bills" class="section">
+                    <h2>Create Bills</h2>
+                    <div class="bill-form">
+                        <h3 id="plan-name">Plan Name Fetch From Database</h3>
+                        <p>Price: &#8377; <span id="plan-price">Fetch From Database</span></p>
+                        <form id="billing-form">
+                            <label for="name">Full Name:</label>
+                            <input type="text" id="memberName" autocomplete="on" placeholder="Enter Your Name"
+                                title="This name will display on bill" required>
+                            <label for="email">Email:</label>
+                            <input type="email" id="memberEmail" autocomplete="on" placeholder="Enter Your Email Id"
+                                title="This email id will display on bill" required>
+                            <label for="payment">Payment Method:</label>
+                            <select id="payment">
+                                <option value="credit">Credit Card</option>
+                                <option value="debit">Debit Card</option>
+                                <option value="upi">UPI</option>
+                            </select>
+                            <button type="button" class="Purchase">Purchase</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="fee-packages" class="section">
+                    <h1>Assign Fee Packages</h1>
+
+                    <h2>Membership Plans</h2>
+                    <div class="row-card">
+                        <div class="card">
+                            <h3>Basic Plan</h3>
+                            <h4 class="detail">&#8377; <input type="text" id="Basic" class="plan"> Per Month</h4>
+                            <button type="button" class="addPrice" id="monthlyBasic">Submit</button>
+                        </div>
+                        <div class="card">
+                            <h3>Standard Plan</h3>
+                            <h4 class="detail">&#8377; <input type="text" id="Standard" class="plan"> Per Month</h4>
+                            <button type="button" class="addPrice" id="monthlyStandard">Submit</button>
+                        </div>
+                        <div class="card">
+                            <h3>Premium Plan</h3>
+                            <h4 class="detail">&#8377; <input type="text" id="Premium" class="plan"> Per Month</h4>
+                            <button type="button" class="addPrice" id="monthlyPremium">Submit</button>
+                        </div>
+                    </div>
+
+                    <h2>Annual Plans</h2>
+                    <div class="row-card">
+                        <div class="card">
+                            <h3>Basic Annual Plan</h3>
+                            <h4 class="detail">&#8377; <input type="text" id="BasicPlan" class="plan"> Per Year </h4>
+                            <button type="button" class="addPrice" id="yearlyBasic">Submit</button>
+                        </div>
+                        <div class="card">
+                            <h3>Standard Annual Plan</h3>
+                            <h4 class="detail">&#8377; <input type="text" id="StandardPlan" class="plan"> Per Year </h4>
+                            <button type="button" class="addPrice" id="yearlyStandard">Submit</button>
+                        </div>
+                        <div class="card">
+                            <h3>Premium Annual Plan</h3>
+                            <h4 class="detail">&#8377; <input type="text" id="PremiumPlan" class="plan"> Per Year </h4>
+                            <button type="button" class="addPrice" id="yearlyPremium">Submit</button>
+                        </div>
+                    </div>
+
+                    <h2>Add-On Services</h2>
+                    <div class="row-card">
+                        <div class="card">
+                            <h3>Personal Training Module</h3>
+                            <h4 class="detail">&#8377; <input type="text" id="PersonalTrainingPlan" class="plan"> Per
+                                Month </h4>
+                            <button type="button" class="addPrice" id="PersonalTraining">Submit</button>
+                        </div>
+                        <div class="card">
+                            <h3>Nutrition Tracking</h3>
+                            <h4 class="detail">&#8377; <input type="text" id="nutritionPlan" class="plan"> Per Month
+                            </h4>
+                            <button type="button" class="addPrice" id="nutrition"> Submit</button>
+                        </div>
+                        <div class="card">
+                            <h3>Online Class Integration</h3>
+                            <h4 class="detail">&#8377; <input type="text" id="onlineClassPlan" class="plan"> Per Month
+                            </h4>
+                            <button type="button" class="addPrice" id="onlineClass">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reports" class="section">
+                    <h2>View Reports</h2>
+                    <div class="ViewReports">
+                        <canvas id="gymReportChart"></canvas>
+                        <table class="reporttable">
+                            <thead>
+                                <tr>
+                                    <th>Report Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Membership Report</td>
+                                    <td>Active & inactive members, new & expired memberships.</td>
+                                </tr>
+                                <tr>
+                                    <td>Financial Report</td>
+                                    <td>Collected revenue, pending dues, and monthly analysis.</td>
+                                </tr>
+                                <tr>
+                                    <td>Training & Diet Report</td>
+                                    <td>Workout progress, assigned diet plans, and compliance.</td>
+                                </tr>
+                                <tr>
+                                    <td>Supplement Store Report</td>
+                                    <td>Best-selling products, available stock, and monthly sales.</td>
+                                </tr>
+                                <tr>
+                                    <td>Attendance Report</td>
+                                    <td>Regular & irregular members, low attendance, trainer records.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="store" class="section">
+                    <h2>Manage Supplement Store</h2>
+                    <div class="manageStore">
+                        <label for="img">Select Product Image</label>
+                        <input type="file" id="img" accept="image/*" required>
+                        
+                        <label for="productname">Product Name</label>
+                        <input type="text" id="productname" placeholder="Enter Product Name" required>
+                        
+                        <label for="productprice">Product Price</label>
+                        <input type="text" id="productprice" placeholder="Enter Product Price" required>
+
+                        <button type="button" id="addProductbtn" class="addProductbtn">Add Product</button>
+                    </div>
+                </div>
+
+                <div id="diet-plans" class="section">
+                    <div class="dietplans">
+                        <h2>Diet Details</h2>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="veg-diet">Vegetarian Diet Plan</label>
+                                </td>
+                                
+                                <td>
+                                    <textarea id="veg-diet" class="vegdiet" rows="5"></textarea>
+                                </td>
+                                
+                                <td>
+                                    <button type="button" class="dietbtn">Submit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="non-veg-diet">Non-Vegetarian Diet Plan</label>
+                                </td>
+                                <td>
+                                    <textarea id="non-veg-diet" class="nonvegdiet" rows="5"></textarea>
+                                </td>
+                                <td>
+                                    <button type="button" class="dietbtn">Submit</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Main Content End -->
+
+    <!-- External Javascript File -->
+    <script src="js/admin.js"></script>
+    <script type="module" src="js/module.js"></script>
+</body>
+
+</html>

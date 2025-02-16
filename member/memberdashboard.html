@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Management System | Member Dashboard</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../content/logo.ico" type="image/x-icon">
+
+    <!-- Font Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- External CSS File -->
+    <link rel="stylesheet" href="css/member.css">
+</head>
+
+<body>
+    <!-- Header Section Start -->
+    <nav class="navbar">
+        <div class="gymname"><a href="#" class="gym-logo">Gym Management System</a></div>
+        <div style="color: #ffffff; font-size: 1.5rem;">Member Dashboard</div>
+
+        <!-- Dropdown button for theme picker -->
+        <div class="dropdown">
+
+            <button class="bell" onclick="toggleNotifications()">
+                <i class="fa-solid fa-bell fa-shake fa-2xl" style="color: #ffffff;"></i>
+            </button>
+            <div id="notificationDropdown" class="dropdown-content"></div>
+
+            <button class="dropbtn" id="dropbtn" onclick="toggleDropdown()">
+                <i class="fa-solid fa-palette fa-2xl" style="color: #ffffff;"></i>
+            </button>
+            <div id="myDropdown" class="dropdown-content">
+                <!-- Theme options -->
+                <div class="theme-option desert"
+                    style="background-image: url('../content/Desert.jpg'); background-size: cover;"
+                    onclick="selectTheme('desert')">Desert</div>
+                <div class="theme-option galaxy"
+                    style="background-image: url('../content/Galaxy.jpg'); background-size: cover;"
+                    onclick="selectTheme('galaxy')">Galaxy</div>
+                <div class="theme-option kinetic"
+                    style="background-image: url('../content/Kinetic.jpg'); background-size: cover;"
+                    onclick="selectTheme('kinetic')">Kinetic</div>
+                <div class="theme-option northern-light selected"
+                    style="background-image: url('../content/NorthernLight.jpg'); background-size: cover;"
+                    onclick="selectTheme('northern-light')">Northern Light</div>
+                <div class="theme-option red-velvet"
+                    style="background-image: url('../content/RedVelvet.jpg'); background-size: cover;"
+                    onclick="selectTheme('red-velvet')">Red Velvet</div>
+                <div class="theme-option solaris"
+                    style="background-image: url('../content/Solaris.jpg'); background-size: cover;"
+                    onclick="selectTheme('solaris')">Solaris</div>
+                <div class="theme-option sunset"
+                    style="background-image: url('../content/Sunset.jpg'); background-size: cover;"
+                    onclick="selectTheme('sunset')">Sunset</div>
+            </div>
+            <button class="logout" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket fa-2xl" style="color: #ffffff;"></i>
+            </button>
+
+        </div>
+    </nav>
+    <!-- Header Section End -->
+
+    <!-- Main Content Start -->
+    <div class="main-content">
+        <div class="showcontent">
+            <!-- Pricing Section Start -->
+            <section class="pricing">
+                <div class="containers">
+                    <h1>Pricing Plans</h1>
+                    <p>
+                        &emsp;&emsp;&emsp;At Gym Management System, we offer flexible and comprehensive pricing
+                        plans designed to meet the diverse needs of fitness centers and their members. Our goal is to
+                        provide solutions that enhance your operations while delivering exceptional value.
+                    </p>
+                    <h2>Membership Plans</h2>
+                    <div class="row-card">
+                        <div class="card">
+                            <h3>Basic Plan</h3>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Access to core gym management functionalities.
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Member check-in and attendance tracking
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Standard reporting tools
+                            </p>
+                            <h4 class="detail">&#8377; 1000 Per Month</h4>
+                            <button type="button" class="getnowbtn" id="monthlyBasic" data-plan="Basic Plan"
+                                data-price="1000">GET NOW &#x2192;</button>
+                        </div>
+                        <div class="card">
+                            <h3>Standard Plan</h3>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                All features in the Basic Plan
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Class scheduling and management
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Automated billing and invoicing
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Email and SMS notifications
+                            </p>
+                            <h4 class="detail">&#8377; 2000 Per Month</h4>
+                            <button type="button" class="getnowbtn" id="monthlyStandard" data-plan="Standard Plan"
+                                data-price="2000">GET NOW &#x2192;</button>
+                        </div>
+                        <div class="card">
+                            <h3>Premium Plan</h3>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                All features in the Standard Plan
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Advanced analytics and reporting
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Customizable member app
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
+                                Priority customer support
+                            </p>
+                            <h4 class="detail">&#8377; 3000 Per Month</h4>
+                            <button type="button" class="getnowbtn" id="monthlyPremium" data-plan="Premium Plan"
+                                data-price="3000">GET NOW &#x2192;</button>
+                        </div>
+                    </div>
+
+                    <h2>Annual Plans</h2>
+                    <p class="detail">Opting for an annual plan provides additional savings and benefits:</p>
+                    <div class="row-card">
+                        <div class="card">
+                            <h3>Basic Annual Plan</h3>
+                            <h4 class="detail">&#8377; 10000 Per Year </h4>
+                            <p style="color: #008000;" class="detail">(Save &#8377; 2000/-)</p>
+                            <button type="button" class="getnowbtn" id="yearlyBasic" data-plan="Basic Annual Plan"
+                                data-price="10000">GET NOW &#x2192;</button>
+                        </div>
+                        <div class="card">
+                            <h3>Standard Annual Plan</h3>
+                            <h4 class="detail">&#8377; 20000 Per Year </h4>
+                            <p style="color: #008000;" class="detail">(Save &#8377; 4000/-)</p>
+                            <button type="button" class="getnowbtn" id="yearlyStandard" data-plan="Standard Annual Plan"
+                                data-price="20000">GET NOW &#x2192;</button>
+                        </div>
+                        <div class="card">
+                            <h3>Premium Annual Plan</h3>
+                            <h4 class="detail">&#8377; 30000 Per Year </h4>
+                            <p style="color: #008000;" class="detail">(Save &#8377; 6000/-)</p>
+                            <button type="button" class="getnowbtn" id="yearlyPremium" data-plan="Premium Annual Plan"
+                                data-price="30000">GET NOW &#x2192;</button>
+                        </div>
+                    </div>
+
+                    <h2>Add-On Services</h2>
+                    <p class="detail">Enhance your membership with the following add-ons:</p>
+                    <div class="row-card">
+                        <div class="card">
+                            <h3>Personal Training Module</h3>
+                            <h4 class="detail">&#8377; 300 Per Month </h4>
+                            <button type="button" class="getnowbtn" id="PersonalTraining"
+                                data-plan="Personal Training Module" data-price="300">GET NOW &#x2192;</button>
+                        </div>
+                        <div class="card">
+                            <h3>Nutrition Tracking</h3>
+                            <h4 class="detail">&#8377; 200 Per Month </h4>
+                            <button type="button" class="getnowbtn" id="nutrition" data-plan="Nutrition Tracking"
+                                data-price="200">GET NOW &#x2192;</button>
+                        </div>
+                        <div class="card">
+                            <h3>Online Class Integration</h3>
+                            <h4 class="detail">&#8377; 100 Per Month </h4>
+                            <button type="button" class="getnowbtn" id="onlineClass"
+                                data-plan="Online Class Integration" data-price="100">GET NOW &#x2192;</button>
+                        </div>
+                    </div>
+
+                    <div class="row-card">
+                        <div class="card">
+                            <h2>Free Trial</h2>
+                            <p>
+                                &emsp;&emsp;&emsp;We offer a 3 days free trial for new clients to experience our
+                                system's
+                                capabilities. No credit card is required to start the trial.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h2>Payment Methods</h2>
+                            <p>
+                                &emsp;&emsp;&emsp;We accept various payment methods, including credit/debit cards, bank
+                                transfers, and online payment gateways. All transactions are secured with
+                                industry-standard
+                                encryption.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h2>Refund Policy</h2>
+                            <p>
+                                &emsp;&emsp;&emsp;We stand by the quality of our services. If you're not satisfied
+                                within
+                                the
+                                first 10 days of your subscription, we offer a full refund. For more details, please
+                                refer
+                                to our
+                                <a href="../refund.html">Refund Policy</a>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="modal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <h2 id="plan-name"></h2>
+                            <p>Price: &#8377;<span id="plan-price"></span></p>
+                            <form id="billing-form">
+                                <label for="name">Full Name:</label>
+                                <input type="text" id="name" autocomplete="on" placeholder="Enter Your Name"
+                                    title="This name will display on bill" required>
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" autocomplete="on" placeholder="Enter Your Email Id"
+                                    title="This email id will display on bill" required>
+                                <label for="payment">Payment Method:</label>
+                                <select id="payment">
+                                    <option value="credit">Credit Card</option>
+                                    <option value="debit">Debit Card</option>
+                                    <option value="upi">UPI</option>
+                                </select>
+                                <button type="button" onclick="submitForm()" class="Purchase">Purchase</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Pricing Section End -->
+        </div>
+    </div>
+    <!-- Main Content End -->
+
+    <!-- External Javascript File -->
+    <script src="js/member.js"></script>
+    <script type="module" src="js/module.js"></script>
+</body>
+
+</html>
