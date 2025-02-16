@@ -1,8 +1,6 @@
 # GymManagementSystem
 Gym Management System Project. Firebase Authentication and Realtime Database. Home, Admin, Member, User, Signup, Login etc pages.
 
-# Gym Management System
-
 ## Introduction
 The **Gym Management System** is a web-based platform designed to automate and streamline the management of a gym. It includes features for membership management, attendance tracking, billing, and supplement store management.
 
