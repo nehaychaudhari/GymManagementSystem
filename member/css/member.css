@@ -3,7 +3,6 @@ body {
     margin: 0;
     transition: background 0.5s ease;
     background-size: fill;
-    /* Ensure the background image covers the entire page */
     background-position: center;
     background-repeat: no-repeat;
 }
