@@ -141,7 +141,7 @@ hr {
     height: 83.5vh;
     background-color: transparent;
     border-right: 1px solid #000000;
-    color: white;
+    color: #ffffff;
     padding: 15px;
     position: fixed;
     left: 0;
@@ -167,7 +167,7 @@ hr {
 }
 
 .sidebar ul li a {
-    color: white;
+    color: #ffffff;
     text-decoration: none;
     font-size: 1.3rem;
 }
@@ -350,6 +350,7 @@ hr {
     font-size: 28px;
     float: right;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .close:hover,
@@ -359,28 +360,38 @@ hr {
     cursor: pointer;
 }
 
-/* Assign Fee Package */
-.row-card .card {
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #000000;
+/* Alert Message Styling */
+.alert {
+    padding: 20px;
+    background-color: #2196f3;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    transition: 0.3s;
 }
 
-.card .plan {
-    background-color: transparent;
+.alert:hover {
+    background-color: #3fa4f6;
 }
 
-#fee-packages {
-    text-align: center;
+.closebtn {
+    margin-left: 1rem;
+    color: #ffffff;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: #000000;
 }
 
 /* Create Bills */
 .bill-form {
-    padding: 5px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
 }
 
 .bill-form #billing-form {
@@ -391,9 +402,10 @@ hr {
     font-size: 1.3rem;
 }
 
-.bill-form #billing-form input,
-.bill-form #billing-form select,
-.manageStore input {
+.bill-form input,
+.bill-form select,
+.manageStore input,
+.manageStore textarea {
     font-size: 1.3rem;
     margin: 10px 0;
     background-color: transparent;
@@ -413,6 +425,48 @@ hr {
 
 .Purchase:hover {
     background-color: #ffa500;
+}
+
+/* Assign Fee Package */
+#fee-packages .row-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+#fee-packages .row-card .card {
+    background: #ffffff0a;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 300px;
+}
+
+#fee-packages .row-card .card h3 {
+    margin-bottom: 15px;
+}
+
+#fee-packages .row-card .card .plan {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#fee-packages .row-card .card .addPrice {
+    background: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#fee-packages .row-card .card .addPrice:hover {
+    background: #45a049;
 }
 
 /* View Reports */
@@ -439,6 +493,46 @@ canvas {
     flex-direction: column;
 }
 
+.product-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.product-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#addProductbtn {
+    background: #4CAF50;
+    color: #ffffff;
+}
+
+#getProductbtn {
+    background: #2196F3;
+    color: #ffffff;
+}
+
+#editProductbtn {
+    background: #FFC107;
+    color: #ffffff;
+}
+
+#deleteProductbtn {
+    background: #f44336;
+    color: #ffffff;
+}
+
+.product-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 /* Diet Detail */
 .dietplans {
     display: flex;
@@ -446,21 +540,56 @@ canvas {
     align-items: center;
 }
 
-.dietplans table{
+.dietplans table {
     width: 100%;
     margin: 1rem 0;
 }
 
 .dietplans table tr td {
     text-align: center;
+    font-size: 1.5rem;
 }
 
-.dietplans table tr td textarea{
+.dietplans table tr td textarea {
     width: 95%;
     background-color: transparent;
     color: #ffffff;
     outline: none;
     border: 2px solid #000000;
+    padding: 10px;
+}
+
+.dietplans table tr td button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-btn {
+    background: #4CAF50;
+}
+
+.update-btn {
+    background: #FFC107;
+}
+
+.delete-btn {
+    background: #f44336;
+}
+
+.add-btn:hover {
+    background: #26a518;
+}
+
+.update-btn:hover {
+    background: #ffac07;
+}
+
+.delete-btn:hover {
+    background: #e00f00;
 }
 
 /* Responsive Style */
