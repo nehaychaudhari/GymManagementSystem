@@ -16,6 +16,11 @@
 
     <!-- External CSS File -->
     <link rel="stylesheet" href="css/user.css">
+
+    <!-- Firebase App (core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+
 </head>
 
 <body>
@@ -23,15 +28,13 @@
     <nav class="navbar">
         <div class="gymname"><a href="#" class="gym-logo">Gym Management System</a></div>
         <div style="color: #ffffff; font-size: 1.5rem;">User Dashboard</div>
-        
+
         <div class="searchbar">
             <i class="fa-solid fa-magnifying-glass search-icon" style="color: #ffffff;"></i>
             <input type="text" name="search" id="search" class="search" placeholder="Search..." />
         </div>
         <!-- Dropdown button for theme picker -->
         <div class="dropdown">
-
-            <!-- <button class="drop"><i class="fa-solid fa-bell fa-shake" style="color: #ffffff;"></i></button> -->
             <button class="dropbtn" id="dropbtn" onclick="toggleDropdown()">
                 <i class="fa-solid fa-palette fa-2xl" style="color: #ffffff;"></i>
             </button>
@@ -59,9 +62,9 @@
                     style="background-image: url('../content/Sunset.jpg'); background-size: cover;"
                     onclick="selectTheme('sunset')">Sunset</div>
             </div>
-            <!-- <span id="user-name" style="color: #ffffff; font-weight: 900;">Neha</span> -->
-            <button class="logout" id="logoutBtn"><i class="fa-solid fa-right-from-bracket fa-2xl"
-                    style="color: #ffffff;"></i></button>
+            <button class="logout" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket fa-2xl" style="color: #ffffff;"></i>
+            </button>
 
         </div>
     </nav>
@@ -157,147 +160,6 @@
                 </div>
             </section>
             <!-- About Section End -->
-
-            <!-- Pricing Section Start -->
-            <section class="pricing">
-                <div class="containers">
-                    <h1>Pricing Plans</h1>
-                    <p>
-                        &emsp;&emsp;&emsp;At Gym Management System, we offer flexible and comprehensive pricing
-                        plans designed to meet the diverse needs of fitness centers and their members. Our goal is to
-                        provide solutions that enhance your operations while delivering exceptional value.
-                    </p>
-                    <h2>Membership Plans</h2>
-                    <div class="row-card">
-                        <div class="card">
-                            <h3>Basic Plan</h3>
-                            <p>
-                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
-                                Access to core gym management functionalities.
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
-                                Member check-in and attendance tracking
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
-                                Standard reporting tools
-                            </p>
-                            <h4 class="detail">&#8377; 1000 Per Month</h4>
-                        </div>
-                        <div class="card">
-                            <h3>Standard Plan</h3>
-                            <p>
-                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
-                                All features in the Basic Plan
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
-                                Class scheduling and management
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
-                                Automated billing and invoicing
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
-                                Email and SMS notifications
-                            </p>
-                            <h4 class="detail">&#8377; 2000 Per Month</h4>
-                        </div>
-                        <div class="card">
-                            <h3>Premium Plan</h3>
-                            <p>
-                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
-                                All features in the Standard Plan
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
-                                Advanced analytics and reporting
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
-                                Customizable member app
-                            </p>
-                            <p>
-                                <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
-                                Priority customer support
-                            </p>
-                            <h4 class="detail">&#8377; 3000 Per Month</h4>
-                        </div>
-                    </div>
-
-                    <h2>Annual Plans</h2>
-                    <p class="detail">Opting for an annual plan provides additional savings and benefits:</p>
-                    <div class="row-card">
-                        <div class="card">
-                            <h3>Basic Annual Plan</h3>
-                            <h4 class="detail">&#8377; 10000 Per Year </h4>
-                            <p style="color: green;" class="detail">(Save &#8377; 2000/-)</p>
-                        </div>
-                        <div class="card">
-                            <h3>Standard Annual Plan</h3>
-                            <h4 class="detail">&#8377; 20000 Per Year </h4>
-                            <p style="color: green;" class="detail">(Save &#8377; 4000/-)</p>
-                        </div>
-                        <div class="card">
-                            <h3>Premium Annual Plan</h3>
-                            <h4 class="detail">&#8377; 30000 Per Year </h4>
-                            <p style="color: green;" class="detail">(Save &#8377; 6000/-)</p>
-                        </div>
-                    </div>
-
-                    <h2>Add-On Services</h2>
-                    <p class="detail">Enhance your membership with the following add-ons:</p>
-                    <div class="row-card">
-                        <div class="card">
-                            <h3>Personal Training Module</h3>
-                            <h4 class="detail">&#8377; 300 Per Month </h4>
-                        </div>
-                        <div class="card">
-                            <h3>Nutrition Tracking</h3>
-                            <h4 class="detail">&#8377; 200 Per Month </h4>
-                        </div>
-                        <div class="card">
-                            <h3>Online Class Integration</h3>
-                            <h4 class="detail">&#8377; 100 Per Month </h4>
-                        </div>
-                    </div>
-
-                    <div class="row-card">
-                        <div class="card">
-                            <h2>Free Trial</h2>
-                            <p>
-                                &emsp;&emsp;&emsp;We offer a 3 days free trial for new clients to experience our
-                                system's
-                                capabilities. No credit card is required to start the trial.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <h2>Payment Methods</h2>
-                            <p>
-                                &emsp;&emsp;&emsp;We accept various payment methods, including credit/debit cards, bank
-                                transfers, and online payment gateways. All transactions are secured with
-                                industry-standard
-                                encryption.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <h2>Refund Policy</h2>
-                            <p>
-                                &emsp;&emsp;&emsp;We stand by the quality of our services. If you're not satisfied
-                                within
-                                the
-                                first 10 days of your subscription, we offer a full refund. For more details, please
-                                refer
-                                to our
-                                <a href="../refund.html">Refund Policy</a>.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Pricing Section End -->
 
             <!-- Contact Section Start -->
             <section class="contact">
