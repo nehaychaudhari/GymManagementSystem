@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Management System | SignUp</title>
+    <!-- AOS Link -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="content/logo.ico" type="image/x-icon">
+
+    <!-- Font Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- External CSS File -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- CryptoJS - Password Encryption -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <!-- Firebase Database -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+</head>
+
+<body>
+    <!-- Header Section Start -->
+    <div id="header-placeholder"></div>
+    <!-- Header Section End -->
+
+    <!-- Main Content Start -->
+    <div class="main-content">
+        <div class="login-form" data-aos="fade-up">
+            <h1>SIGNUP</h1>
+        </div>
+        <div class="contact">
+            <form id="contactForm" data-aos="flip-up">
+                <label for="name">Name:</label>
+                <input type="text" id="name" autocomplete="on" placeholder="Enter Your Full Name" required />
+
+                <label for="email">Email Id</label>
+                <input type="email" id="email" autocomplete="on" placeholder="example@example.com" required />
+
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter Your Password" required />
+
+                <div class="showpass">
+                    <input type="checkbox" id="showP" onclick="showPass()"> Show Password
+                </div>
+
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm Your Password" required />
+
+                <div class="showpass">
+                    <input type="checkbox" id="confirmP" onclick="confirmPass()"> Show Password
+                </div>
+
+                <label for="role">Select Role</label>
+                <select id="role">
+                    <option value="Admin">Admin</option>
+                    <option value="Member">Member</option>
+                    <option value="User">User</option>
+                </select>
+                <em>
+                    <p>By creating an account you agree to our 
+                        <a href="terms.html">Terms and Conditions,</a>
+                        <a href="privacy.html">Privacy Policy,</a> and
+                        <a href="refund.html">Refund Policy.</a>
+                    </p>
+                </em>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="flexCheckDefault" required />
+                    I Agree
+                </div>
+
+                <button type="button" class="btn" id="signup-btn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    <!-- Main Content End -->
+
+    <!-- Footer Section Start -->
+    <div id="footer-placeholder"></div>
+    <!-- Footer Section End -->
+
+    <!-- AOS Link -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <!-- External Javascript File -->
+    <script src="js/script.js"></script>
+
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAeqAspljLEGBBoV6u58n8h4dbK4lHryAE",
+            authDomain: "gym-management-system-31.firebaseapp.com",
+            databaseURL: "https://gym-management-system-31-default-rtdb.firebaseio.com",
+            projectId: "gym-management-system-31",
+            storageBucket: "gym-management-system-31.firebasestorage.app",
+            messagingSenderId: "487007453376",
+            appId: "1:487007453376:web:e728346f1beee4fc18ad25"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the Firebase Realtime Database
+        var database = firebase.database();
+
+        // Get a reference to the signup form and button
+        var signupForm = document.getElementById("contactForm");
+        var signupBtn = document.getElementById("signup-btn");
+
+        // Add an event listener to the signup button
+        signupBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Get the name, email, password, confirm password, and role from the form
+            var name = document.getElementById("name").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var password = document.getElementById("password").value.trim();
+            var confirmPassword = document.getElementById("confirm-password").value.trim();
+            var role = document.getElementById("role").value.trim();
+
+            // Check if the password and confirm password match
+            if (password !== confirmPassword) {
+                alert("Password and Confirm Password do not match");
+                return;
+            }
+
+            // Encrypt Password using CryptoJS
+            var encryptedPassword = CryptoJS.AES.encrypt(password, "secret-key").toString();
+
+            // Email as Key (replace "." with "_")
+            var emailKey = email.replace(/\./g, "_");
+
+            // Define Database Path Based on Role
+            var userPath = `users/${role.toLowerCase()}/${emailKey}`;
+
+            // Check if the email is already in use
+            database.ref(userPath).once('value', function (snapshot) {
+                if (snapshot.exists()) {
+                    alert("Email is already in use");
+                    return;
+                } else {
+                    // Create a new user in the Firebase Realtime Database
+                    database.ref(userPath).set({
+                        name: name,
+                        email: email,
+                        password: encryptedPassword,
+                        role: role,
+                    });
+
+                    alert("Signup Successful!");
+
+                    // Redirect to the dashboard based on the user's role
+                    if (role === "Admin") {
+                        window.location.href = "admin/admindashboard.html";
+                    } else if (role === "Member") {
+                        window.location.href = "member/memberdashboard.html";
+                    } else if (role === "User") {
+                        window.location.href = "user/userdashboard.html";
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

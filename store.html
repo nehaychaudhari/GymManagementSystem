@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Management System | Home</title>
+
+    <!-- AOS Link -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="content/logo.ico" type="image/x-icon">
+
+    <!-- Font Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- External CSS File -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- JQuery CDN Script For Navbar Activation -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+</head>
+
+<body>
+    <!-- Header Section Start -->
+    <div id="header-placeholder"></div>
+    <!-- Header Section End -->
+    <div class="store-main">
+
+        <!-- Store Section Start -->
+        <section class="store">
+            <div class="containers">
+                <h1 data-aos="fade-up">Supplement Store</h1>
+                <div class="product-container" data-aos="fade-up">
+                    <div class="product-row">
+                        <!-- Product cards will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr style="margin-top: 50px;">
+        
+        <!-- Diet Section Start -->
+        <section class="diet-section">
+            <div class="containers">
+                <h1 data-aos="fade-up">Diet Details</h1>
+                <div class="diet-container" data-aos="fade-up">
+                    <div class="diet-row">
+                        <div class="diet-card">
+                            <h2>Vegetarian Diet Plan</h2>
+                            <div class="diet-content" id="veg-diet-content">
+                                Loading...
+                            </div>
+                        </div>
+                        <div class="diet-card">
+                            <h2>Non-Vegetarian Diet Plan</h2>
+                            <div class="diet-content" id="nonveg-diet-content">
+                                Loading...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Diet Section End -->
+
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+            import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-database.js";
+
+            // Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyAeqAspljLEGBBoV6u58n8h4dbK4lHryAE",
+                authDomain: "gym-management-system-31.firebaseapp.com",
+                databaseURL: "https://gym-management-system-31-default-rtdb.firebaseio.com",
+                projectId: "gym-management-system-31",
+                storageBucket: "gym-management-system-31.firebasestorage.app",
+                messagingSenderId: "487007453376",
+                appId: "1:487007453376:web:e728346f1beee4fc18ad25"
+            };
+
+            // Firebase initialize kara
+            const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
+            const productsRef = ref(database, 'products');
+
+            // Products fetch karnyasathi function
+            async function fetchProducts() {
+                try {
+                    const snapshot = await get(productsRef);
+                    const products = [];
+
+                    snapshot.forEach((childSnapshot) => {
+                        const product = childSnapshot.val();
+                        product.key = childSnapshot.key;
+                        products.push(product);
+                    });
+
+                    displayProducts(products);
+                } catch (error) {
+                    console.error("Products fetch kartana error aala: ", error);
+                }
+            }
+
+            // Products display karnyasathi function 
+            function displayProducts(products) {
+                const productRow = document.querySelector('.product-row');
+                productRow.innerHTML = '';
+
+                products.forEach((product, index) => {
+                    // New row every 4 products
+                    if (index % 4 === 0) {
+                        productRow.innerHTML += '<div class="product-grid-row"></div>';
+                    }
+
+                    const productCard = `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name}</h3>
+                            <hr>
+                            <p class="product-key">Product ID: ${product.key}</p>
+                            <p class="product-details">${product.details}</p>
+                            <hr>
+                            <p class="product-price">${product.price}</p>
+                            <button class="buy-btn" id="buy-btn">Buy Now</button>
+                        </div>
+                    </div>
+                `;
+
+                    const rows = document.querySelectorAll('.product-grid-row');
+                    const currentRow = rows[rows.length - 1];
+                    currentRow.innerHTML += productCard;
+                });
+            }
+            // Buy button click handler
+            document.addEventListener('click', function (event) {
+                if (event.target.classList.contains('buy-btn')) {
+                    const productCard = event.target.closest('.product-card');
+                    const productId = productCard.querySelector('.product-key').textContent.split(': ')[1];
+                    const productName = productCard.querySelector('.product-name').textContent;
+                    const productPrice = productCard.querySelector('.product-price').textContent;
+
+                    // Customer la confirm kara
+                    const confirmation = confirm(`Are you sure you want to buy?\n\nProduct: ${productName}\nPrice: ${productPrice}`);
+
+                    if (confirmation) {
+                        try {
+                            alert('Order placed successfully!\nProduct ID: ' + productId);
+                        } catch (error) {
+                            console.error('Error in order process:', error);
+                            alert('Error in order process. Please try again.');
+                        }
+                    }
+                }
+            });
+
+            // Page load zala ki products fetch kara
+            document.addEventListener('DOMContentLoaded', fetchProducts);
+
+            // Fetch diet data from Firebase
+            const vegDietRef = ref(database, 'Diet/veg');
+            const nonVegDietRef = ref(database, 'Diet/nonveg');
+
+            // Fetch vegetarian diet data
+            get(vegDietRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const vegContent = document.getElementById('veg-diet-content');
+                    vegContent.textContent = snapshot.val().diet;
+                }
+            }).catch((error) => {
+                console.error("Veg diet fetch kartana error aala:", error);
+            });
+
+            // Fetch non-vegetarian diet data
+            get(nonVegDietRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const nonVegContent = document.getElementById('nonveg-diet-content');
+                    nonVegContent.textContent = snapshot.val().diet;
+                }
+            }).catch((error) => {
+                console.error("Non-veg diet fetch kartana error aala:", error);
+            });
+        </script>
+    </div>
+
+    <!-- Store Section End -->
+
+    <!-- Footer Section Start -->
+    <div id="footer-placeholder"></div>
+    <!-- Footer Section End -->
+
+    <!-- AOS Link -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <!-- External Javascript File -->
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
