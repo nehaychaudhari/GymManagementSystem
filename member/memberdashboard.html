@@ -25,14 +25,15 @@
         <!-- Dropdown button for theme picker -->
         <div class="dropdown">
 
-            <button class="bell" onclick="toggleNotifications()">
+            <button class="bell" id="bell">
                 <i class="fa-solid fa-bell fa-shake fa-2xl" style="color: #ffffff;"></i>
             </button>
             <div id="notificationDropdown" class="dropdown-content"></div>
 
-            <button class="dropbtn" id="dropbtn" onclick="toggleDropdown()">
+            <button class="dropbtn" id="dropbtn"  onclick="toggleDropdown()">
                 <i class="fa-solid fa-palette fa-2xl" style="color: #ffffff;"></i>
             </button>
+
             <div id="myDropdown" class="dropdown-content">
                 <!-- Theme options -->
                 <div class="theme-option desert"
@@ -57,6 +58,7 @@
                     style="background-image: url('../content/Sunset.jpg'); background-size: cover;"
                     onclick="selectTheme('sunset')">Sunset</div>
             </div>
+
             <button class="logout" id="logoutBtn">
                 <i class="fa-solid fa-right-from-bracket fa-2xl" style="color: #ffffff;"></i>
             </button>
@@ -93,9 +95,8 @@
                                 <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
                                 Standard reporting tools
                             </p>
-                            <h4 class="detail">&#8377; 1000 Per Month</h4>
-                            <button type="button" class="getnowbtn" id="monthlyBasic" data-plan="Basic Plan"
-                                data-price="1000">GET NOW &#x2192;</button>
+                            <h4 class="detail">&#8377; <span id="monthlyBasicPrice"></span> Per Month</h4>
+                            <button type="button" class="getnowbtn" id="monthlyBasic">GET NOW &#x2192;</button>
                         </div>
                         <div class="card">
                             <h3>Standard Plan</h3>
@@ -115,9 +116,8 @@
                                 <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
                                 Email and SMS notifications
                             </p>
-                            <h4 class="detail">&#8377; 2000 Per Month</h4>
-                            <button type="button" class="getnowbtn" id="monthlyStandard" data-plan="Standard Plan"
-                                data-price="2000">GET NOW &#x2192;</button>
+                            <h4 class="detail">&#8377; <span id="monthlyStandardPrice"></span> Per Month</h4>
+                            <button type="button" class="getnowbtn" id="monthlyStandard">GET NOW &#x2192;</button>
                         </div>
                         <div class="card">
                             <h3>Premium Plan</h3>
@@ -137,9 +137,8 @@
                                 <i class="fa-solid fa-diamond fa-2xs" style="color: #ffffff;"></i>&emsp;
                                 Priority customer support
                             </p>
-                            <h4 class="detail">&#8377; 3000 Per Month</h4>
-                            <button type="button" class="getnowbtn" id="monthlyPremium" data-plan="Premium Plan"
-                                data-price="3000">GET NOW &#x2192;</button>
+                            <h4 class="detail">&#8377; <span id="monthlyPremiumPrice"></span> Per Month</h4>
+                            <button type="button" class="getnowbtn" id="monthlyPremium">GET NOW &#x2192;</button>
                         </div>
                     </div>
 
@@ -148,24 +147,26 @@
                     <div class="row-card">
                         <div class="card">
                             <h3>Basic Annual Plan</h3>
-                            <h4 class="detail">&#8377; 10000 Per Year </h4>
-                            <p style="color: #008000;" class="detail">(Save &#8377; 2000/-)</p>
-                            <button type="button" class="getnowbtn" id="yearlyBasic" data-plan="Basic Annual Plan"
-                                data-price="10000">GET NOW &#x2192;</button>
+                            <h4 class="detail">&#8377; <span id="yearlyBasicPrice"></span> Per Year </h4>
+                            <p style="color: green;" class="detail">(Save &#8377; <span
+                                    id="yearlyBasicSavings"></span>/-)
+                            </p>
+                            <button type="button" class="getnowbtn" id="yearlyBasic">GET NOW &#x2192;</button>
                         </div>
                         <div class="card">
                             <h3>Standard Annual Plan</h3>
-                            <h4 class="detail">&#8377; 20000 Per Year </h4>
-                            <p style="color: #008000;" class="detail">(Save &#8377; 4000/-)</p>
-                            <button type="button" class="getnowbtn" id="yearlyStandard" data-plan="Standard Annual Plan"
-                                data-price="20000">GET NOW &#x2192;</button>
+                            <h4 class="detail">&#8377; <span id="yearlyStandardPrice"></span> Per Year </h4>
+                            <p style="color: green;" class="detail">(Save &#8377; <span
+                                    id="yearlyStandardSavings"></span>/-)</p>
+                            <button type="button" class="getnowbtn" id="yearlyStandard">GET NOW &#x2192;</button>
                         </div>
                         <div class="card">
                             <h3>Premium Annual Plan</h3>
-                            <h4 class="detail">&#8377; 30000 Per Year </h4>
-                            <p style="color: #008000;" class="detail">(Save &#8377; 6000/-)</p>
-                            <button type="button" class="getnowbtn" id="yearlyPremium" data-plan="Premium Annual Plan"
-                                data-price="30000">GET NOW &#x2192;</button>
+                            <h4 class="detail">&#8377; <span id="yearlyPremiumPrice"></span> Per Year </h4>
+                            <p style="color: green;" class="detail">(Save &#8377; <span
+                                    id="yearlyPremiumSavings"></span>/-)
+                            </p>
+                            <button type="button" class="getnowbtn" id="yearlyPremium">GET NOW &#x2192;</button>
                         </div>
                     </div>
 
@@ -174,21 +175,18 @@
                     <div class="row-card">
                         <div class="card">
                             <h3>Personal Training Module</h3>
-                            <h4 class="detail">&#8377; 300 Per Month </h4>
-                            <button type="button" class="getnowbtn" id="PersonalTraining"
-                                data-plan="Personal Training Module" data-price="300">GET NOW &#x2192;</button>
+                            <h4 class="detail">&#8377; <span id="personalTrainingPrice"></span> Per Month </h4>
+                            <button type="button" class="getnowbtn" id="PersonalTraining">GET NOW &#x2192;</button>
                         </div>
                         <div class="card">
                             <h3>Nutrition Tracking</h3>
-                            <h4 class="detail">&#8377; 200 Per Month </h4>
-                            <button type="button" class="getnowbtn" id="nutrition" data-plan="Nutrition Tracking"
-                                data-price="200">GET NOW &#x2192;</button>
+                            <h4 class="detail">&#8377; <span id="nutritionPrice"></span> Per Month </h4>
+                            <button type="button" class="getnowbtn" id="nutrition">GET NOW &#x2192;</button>
                         </div>
                         <div class="card">
                             <h3>Online Class Integration</h3>
-                            <h4 class="detail">&#8377; 100 Per Month </h4>
-                            <button type="button" class="getnowbtn" id="onlineClass"
-                                data-plan="Online Class Integration" data-price="100">GET NOW &#x2192;</button>
+                            <h4 class="detail">&#8377; <span id="onlineClassPrice"></span> Per Month </h4>
+                            <button type="button" class="getnowbtn" id="onlineClass">GET NOW &#x2192;</button>
                         </div>
                     </div>
 
@@ -227,22 +225,41 @@
                     <div id="modal" class="modal">
                         <div class="modal-content">
                             <span class="close" onclick="closeModal()">&times;</span>
-                            <h2 id="plan-name"></h2>
-                            <p>Price: &#8377;<span id="plan-price"></span></p>
                             <form id="billing-form">
-                                <label for="name">Full Name:</label>
-                                <input type="text" id="name" autocomplete="on" placeholder="Enter Your Name"
-                                    title="This name will display on bill" required>
-                                <label for="email">Email:</label>
-                                <input type="email" id="email" autocomplete="on" placeholder="Enter Your Email Id"
-                                    title="This email id will display on bill" required>
-                                <label for="payment">Payment Method:</label>
-                                <select id="payment">
+                                <p>Selected Plan: <span id="bill-selected-plan"></span></p>
+                                <p>Price: ₹<span id="bill-plan-price"></span></p>
+
+                                <label for="bill-member-name">Member Name:</label>
+                                <input type="text" id="bill-member-name" required>
+
+                                <label for="bill-member-email">Member Email:</label>
+                                <input type="email" id="bill-member-email" required>
+
+                                <label for="bill-payment">Payment Method:</label>
+                                <select id="bill-payment" required>
+                                    <option value="">Select payment method</option>
                                     <option value="credit">Credit Card</option>
                                     <option value="debit">Debit Card</option>
                                     <option value="upi">UPI</option>
                                 </select>
-                                <button type="button" onclick="submitForm()" class="Purchase">Purchase</button>
+
+                                <div id="bill-credit-card" class="payment-method" style="display:none">
+                                    <input type="text" id="bill-credit-card-number" placeholder="Card Number" required>
+                                    <input type="text" id="bill-credit-card-expiry" placeholder="Expiry Date" required>
+                                    <input type="text" id="bill-credit-card-cvv" placeholder="CVV" required>
+                                </div>
+
+                                <div id="bill-debit-card" class="payment-method" style="display:none">
+                                    <input type="text" id="bill-debit-card-number" placeholder="Card Number" required>
+                                    <input type="text" id="bill-debit-card-expiry" placeholder="Expiry Date" required>
+                                    <input type="text" id="bill-debit-card-cvv" placeholder="CVV" required>
+                                </div>
+
+                                <div id="bill-upi-payment" class="payment-method" style="display:none">
+                                    <input type="text" id="bill-upi-id" placeholder="Enter UPI ID" required>
+                                </div>
+
+                                <button type="button" class="Purchase" id="processPurchase">Purchase</button>
                             </form>
                         </div>
                     </div>
