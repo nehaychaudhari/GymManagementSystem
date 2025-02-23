@@ -51,11 +51,10 @@ function toggleDropdown() {
 
 // Logout - Redirect Logic
 document.getElementById('logoutBtn').addEventListener('click', function () {
-    // Redirect to index.html (relative path)
     window.location.href = "../index.html";
 });
 
-// Close Modal
+// Close Purchase Modal
 function closeModal() {
     document.getElementById('modal').style.display = 'none';
 }
