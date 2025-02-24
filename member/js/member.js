@@ -58,3 +58,12 @@ document.getElementById('logoutBtn').addEventListener('click', function () {
 function closeModal() {
     document.getElementById('modal').style.display = 'none';
 }
+
+// Print Bill
+function printBill() {
+    const printContents = document.getElementById('modal').innerHTML;
+    const originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+}
