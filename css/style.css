@@ -263,17 +263,14 @@ nav li:first-child {
 
 /* Plan Section Start */
 .pricing {
-    padding: 0 5rem 0 5rem;
     line-height: 1.5;
     font-size: 1.5rem;
+    width: 100%;
     text-align: justify;
 }
 
 .pricing h2,
-.card h3 {
-    text-align: center;
-}
-
+.card h3,
 .detail {
     text-align: center;
 }
@@ -287,14 +284,33 @@ nav li:first-child {
 .card {
     border: 1px solid #ffffff;
     margin: 1rem;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     transition: 1s;
-    width: 30%;
+    width: 27%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .card:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 10px 5px #ffffff;
+    box-shadow: 0px 0px 10px 5px #ffffff;
+}
+
+.getnowbtn,
+#StartTrial {
+    color: #ffffff;
+    background-color: #008000;
+    transition: 1s;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.getnowbtn:hover,
+#StartTrial:hover {
+    background-color: #ffa500;
 }
 
 @media (max-width: 800px) {
