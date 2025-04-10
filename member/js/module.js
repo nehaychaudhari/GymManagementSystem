@@ -192,5 +192,29 @@ function displayPrices() {
     });
 }
 
+document.getElementById('StartTrial').addEventListener('click', function() {
+    // Set session start time
+    const sessionStart = new Date().getTime();
+    const sessionDuration = 72 * 60 * 60 * 1000;
+
+    // Store session start time in localStorage
+    localStorage.setItem('sessionStart', sessionStart);
+
+    // Notify user that trial has started
+    alert("Your trial period has commenced successfully!!!");
+
+    // Disable the StartTrial button
+    this.disabled = true;
+
+    // Check if session has ended after 72 hours
+    setTimeout(() => {
+        const currentTime = new Date().getTime();
+        if (currentTime - sessionStart >= sessionDuration) {
+            alert("Your trial session has ended.");
+        }
+    }, sessionDuration);
+});
+
+
 // Call the function when page loads to display prices
 displayPrices();
