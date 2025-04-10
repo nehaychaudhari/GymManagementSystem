@@ -26,6 +26,20 @@
 
     <!-- Firebase Database -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+    <!-- EmailJS Installation -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <!-- Replace YOUR_PUBLIC_KEY with your original Public Key
+         You can find your Public Key in the EmailJS Dashboard. 
+         After going to the Dashboard, you will find your Public Key in the "API Keys" section. -->
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "YOUR_PUBLIC_KEY",
+            });
+        })();
+    </script>
 </head>
 
 <body>
@@ -155,6 +169,7 @@
                             Standard reporting tools
                         </p>
                         <h4 class="detail">&#8377; <span id="monthlyBasicPrice"></span> Per Month</h4>
+                        <button type="button" class="getnowbtn">GET NOW &#x2192;</button>
                     </div>
                     <div class="card">
                         <h3>Standard Plan</h3>
@@ -175,6 +190,7 @@
                             Email and SMS notifications
                         </p>
                         <h4 class="detail">&#8377; <span id="monthlyStandardPrice"></span> Per Month</h4>
+                        <button type="button" class="getnowbtn">GET NOW &#x2192;</button>
                     </div>
                     <div class="card">
                         <h3>Premium Plan</h3>
@@ -195,6 +211,7 @@
                             Priority customer support
                         </p>
                         <h4 class="detail">&#8377; <span id="monthlyPremiumPrice"></span> Per Month</h4>
+                        <button type="button" class="getnowbtn">GET NOW &#x2192;</button>
                     </div>
                 </div>
 
@@ -206,18 +223,21 @@
                         <h4 class="detail">&#8377; <span id="yearlyBasicPrice"></span> Per Year </h4>
                         <p style="color: green;" class="detail">(Save &#8377; <span id="yearlyBasicSavings"></span>/-)
                         </p>
+                        <button type="button" class="getnowbtn">GET NOW &#x2192;</button>
                     </div>
                     <div class="card">
                         <h3>Standard Annual Plan</h3>
                         <h4 class="detail">&#8377; <span id="yearlyStandardPrice"></span> Per Year </h4>
                         <p style="color: green;" class="detail">(Save &#8377; <span
                                 id="yearlyStandardSavings"></span>/-)</p>
+                        <button type="button" class="getnowbtn">GET NOW &#x2192;</button>
                     </div>
                     <div class="card">
                         <h3>Premium Annual Plan</h3>
                         <h4 class="detail">&#8377; <span id="yearlyPremiumPrice"></span> Per Year </h4>
                         <p style="color: green;" class="detail">(Save &#8377; <span id="yearlyPremiumSavings"></span>/-)
                         </p>
+                        <button type="button" class="getnowbtn">GET NOW &#x2192;</button>
                     </div>
                 </div>
 
@@ -227,14 +247,17 @@
                     <div class="card">
                         <h3>Personal Training Module</h3>
                         <h4 class="detail">&#8377; <span id="personalTrainingPrice"></span> Per Month </h4>
+                        <button type="button" class="getnowbtn">GET NOW &#x2192;</button>
                     </div>
                     <div class="card">
                         <h3>Nutrition Tracking</h3>
                         <h4 class="detail">&#8377; <span id="nutritionPrice"></span> Per Month </h4>
+                        <button type="button" class="getnowbtn">GET NOW &#x2192;</button>
                     </div>
                     <div class="card">
                         <h3>Online Class Integration</h3>
                         <h4 class="detail">&#8377; <span id="onlineClassPrice"></span> Per Month </h4>
+                        <button type="button" class="getnowbtn">GET NOW &#x2192;</button>
                     </div>
                 </div>
 
@@ -245,6 +268,7 @@
                             &emsp;&emsp;&emsp;We offer a 3 days free trial for new clients to experience our system's
                             capabilities. No credit card is required to start the trial.
                         </p>
+                        <button type="button" class="getnowbtn">Start Free Trial &#x2192;</button>
                     </div>
                     <div class="card">
                         <h2>Payment Methods</h2>
@@ -311,6 +335,7 @@
 
         // Get database reference 
         const db = firebase.database();
+
         // Get prices from Firebase and display them
         function displayPrices() {
             // Monthly Plans
@@ -357,6 +382,37 @@
             db.ref('plans/onlineClass').once('value').then((snapshot) => {
                 document.getElementById('onlineClassPrice').textContent = snapshot.val().price;
             });
+        }
+
+        document.querySelectorAll('.getnowbtn').forEach(button => {
+            button.addEventListener('click', function () {
+                window.location.href = 'login.html';
+            });
+        });
+
+        function sendMail() {
+            let name = document.getElementById("uname").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+
+            // Email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!name || !email || !message) {
+                alert("Please fill all fields first.");
+                return;
+            } else if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            let parms = {
+                name: name,
+                email: email,
+                message: message,
+            }
+            
+            // You can find your service ID in the Email Services section and your template ID in the Email Templates section of the EmailJS Dashboard.
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", parms).then(alert("Your Email Sent Successfully!!!"))
         }
 
         // Call the function when page loads
