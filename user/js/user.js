@@ -102,3 +102,28 @@ function getTextNodes(element) {
     }
     return textNodes;
 }
+
+function sendMail() {
+    let name = document.getElementById("uname").value;
+    let email = document.getElementById("email").value;
+    let message = document.getElementById("message").value;
+
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!name || !email || !message) {
+        alert("Please fill all fields first.");
+        return;
+    } else if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    let parms = {
+        name: name,
+        email: email,
+        message: message,
+    }
+    
+    // You can find your service ID in the Email Services section and your template ID in the Email Templates section of the EmailJS Dashboard.
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", parms).then(alert("Your Email Sent Successfully!!!"))
+}
