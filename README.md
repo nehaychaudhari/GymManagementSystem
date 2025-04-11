@@ -1,5 +1,4 @@
-# GymManagementSystem
-Gym Management System Project. Firebase Authentication and Realtime Database. Home, Admin, Member, User, Signup, Login etc pages.
+# Gym Management System
 
 ## Introduction
 The **Gym Management System** is a web-based platform designed to automate and streamline the management of a gym. It includes features for membership management, attendance tracking, billing, and supplement store management.
@@ -114,4 +113,70 @@ For further inquiries, please contact [chaudharinehay2001@gmail.com].
    - Ensure the Firebase Database SDK is properly imported.  
 
 3. Run the Code and Verify Output:  
-   - Once the code runs successfully, the data from Firebase will be displayed on the webpage in a structured table format.  
+   - Once the code runs successfully, the data from Firebase will be displayed on the webpage in a structured table format.
+---------------------------------------------------------------------------------------------------------
+
+### Email receive from user using EmailJS
+
+1. Create an EmailJS Account:
+Visit the EmailJS website and sign up for a free account.
+Log in to your dashboard. 
+
+2. Add an Email Service:
+In the dashboard, navigate to the "Email Services" section. 
+Choose from the supported services (like Gmail, Outlook) and click on it. 
+Fill out the service details, such as your email address and password. 
+Test the email service to ensure it's working correctly. 
+
+3. Create an Email Template:
+Go to the "Email Templates" section and create a new template. 
+Customize the template with placeholders for dynamic data (e.g., user name, message). 
+
+4. Integrate EmailJS SDK into your project:
+Install the EmailJS SDK using npm or yarn.
+Add the necessary script tag in your HTML.
+Initialize EmailJS with your public key. 
+
+5. Use the SDK to send emails:
+Use the emailjs.send() or emailjs.sendForm() function to trigger an email.
+Pass the necessary parameters, such as the service ID, template ID, and any dynamic variables from your form data. 
+
+Example (using emailjs.send()):
+```
+emailjs.send('your_service_id', 'your_template_id', {
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+  message: 'This is a test email.'
+}).then(function(response) {
+    console.log('SUCCESS!', response.status, response.text);
+}, function(error) {
+    console.log('FAILED', error);
+});
+```
+Example (using emailjs.sendForm()):
+
+```
+<form id="contactForm">
+  <input type="text" name="user_name" placeholder="Name">
+  <input type="email" name="user_email" placeholder="Email">
+  <textarea name="message" placeholder="Message"></textarea>
+  <button type="submit">Send</button>
+</form>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm('your_service_id', 'your_template_id', this)
+      .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+        // You can add a success message to the user
+      }, function(error) {
+        console.log('FAILED', error);
+        // You can display an error message to the user
+      });
+  });
+</script>
+```
+
+For more details, you can refer to the EmailJS documentation.(https://www.emailjs.com/docs/)
